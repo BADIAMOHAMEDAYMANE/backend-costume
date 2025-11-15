@@ -20,6 +20,10 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'role',
     ];
+    public function vesteProfiles()
+    {
+        return $this->hasMany(\App\Models\VesteProfile::class, 'user_id');
+    }
 
     public function getJWTIdentifier()
     {
@@ -36,5 +40,7 @@ class User extends Authenticatable implements JWTSubject
             'role' => $this->role,
         ];
     }
+
+
 
 }

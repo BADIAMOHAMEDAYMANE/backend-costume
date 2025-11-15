@@ -4,15 +4,26 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VesteProfileController;
 
-// Public routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/refresh', [AuthController::class, 'refresh']);
 Route::get('/validate-token', [AuthController::class, 'validateToken']);
 Route::post('/check-email', [AuthController::class, 'checkEmail']);
 
-// Protected routes
+
+
+Route::prefix('veste-profiles')->group(function () {
+    Route::post('/', [VesteProfileController::class, 'create']);
+    Route::get('/{id}', [VesteProfileController::class, 'getById']);
+    Route::get('/user/{userId}', [VesteProfileController::class, 'getByUser']);
+    Route::put('/{id}', [VesteProfileController::class, 'update']);
+    Route::delete('/{id}', [VesteProfileController::class, 'delete']);
+});
+
+
+
 Route::middleware([JwtMiddleware::class])->group(function () {
     // Auth routes
     Route::post('/logout', [AuthController::class, 'logout']);
