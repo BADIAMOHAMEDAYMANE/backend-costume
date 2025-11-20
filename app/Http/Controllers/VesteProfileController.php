@@ -48,10 +48,14 @@ class VesteProfileController extends Controller
         return $this->service->update($id, $request->all());
     }
 
-    public function delete($id)
+    public function delete($id): \Illuminate\Http\JsonResponse
     {
         $this->service->delete($id);
         return response()->json(['message' => 'Profile deleted']);
+    }
+    public function getall(): \Illuminate\Database\Eloquent\Collection
+    {
+        return $this->service->getAllVesteProfiles();
     }
 }
 
