@@ -16,6 +16,7 @@ Route::post('/check-email', [AuthController::class, 'checkEmail']);
 
 Route::prefix('veste-profiles')->group(function () {
     Route::post('/', [VesteProfileController::class, 'create']);
+    Route::get('/', [VesteProfileController::class, 'getall']);
     Route::get('/{id}', [VesteProfileController::class, 'getById']);
     Route::get('/user/{userId}', [VesteProfileController::class, 'getByUser']);
     Route::put('/{id}', [VesteProfileController::class, 'update']);

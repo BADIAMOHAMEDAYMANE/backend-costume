@@ -44,5 +44,9 @@ class VesteProfileService
         }
         return false;
     }
+    public function getAllVesteProfiles(){
+        return $this->repo->getall();
+    }
+
 }
 

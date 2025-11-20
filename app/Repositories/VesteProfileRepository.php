@@ -32,6 +32,12 @@ class VesteProfileRepository implements VesteProfileRepositoryInterface
         $profile->update($data);
         return $profile;
     }
+    public function getall()
+    {
+        return VesteProfile::all();
+    }
+
+
 
     public function delete($id)
     {

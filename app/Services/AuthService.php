@@ -48,6 +48,7 @@ class AuthService
 
 
         return $this->jwtService->generateToken($user);
+
     }
 
     public function login(array $data): array
