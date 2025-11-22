@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GiletController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VesteProfileController;
@@ -21,6 +22,15 @@ Route::prefix('veste-profiles')->group(function () {
     Route::get('/user/{userId}', [VesteProfileController::class, 'getByUser']);
     Route::put('/{id}', [VesteProfileController::class, 'update']);
     Route::delete('/{id}', [VesteProfileController::class, 'delete']);
+});
+
+Route::prefix('gilets')->group(function () {
+    Route::post('/', [GiletController::class, 'create']);
+    Route::get('/', [GiletController::class, 'getall']);
+    Route::get('/{id}', [GiletController::class, 'getById']);
+    Route::get('/user/{userId}', [GiletController::class, 'getByUser']);
+    Route::put('/{id}', [GiletController::class, 'update']);
+    Route::delete('/{id}', [GiletController::class, 'delete']);
 });
 
 

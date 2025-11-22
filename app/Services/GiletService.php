@@ -1,14 +1,15 @@
 <?php
+
 namespace App\Services;
 
-use App\Models\VesteProfile;
-use App\Repositories\VesteProfileRepository;
+use App\Models\Gilet;
+use App\Repositories\GiletRepository;
 
-class VesteProfileService
+class GiletService
 {
-    protected VesteProfileRepository $repo;
+    protected GiletRepository $repo;
 
-    public function __construct(VesteProfileRepository $repo)
+    public function __construct(GiletRepository $repo)
     {
         $this->repo = $repo;
     }
@@ -33,21 +34,20 @@ class VesteProfileService
         $profile = $this->repo->getById($id);
         if (!$profile) return null;
 
-        return $this->repo->update($profile, $data);
+        return $this->repo->update($id, $data);
     }
 
     public function delete($id)
     {
         $profile = $this->repo->getById($id);
         if ($profile) {
-            return $this->repo->delete($profile);
+            return $this->repo->delete($id);
         }
         return false;
     }
-    public function getAllVesteProfiles(): \Illuminate\Database\Eloquent\Collection
+
+    public function getAllGilet(): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->repo->getall();
+        return $this->repo->getAll();
     }
-
 }
-
