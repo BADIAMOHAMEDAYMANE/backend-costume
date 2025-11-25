@@ -21,10 +21,9 @@ class GiletController extends Controller
             'profile_name' => 'string',
             'tour_poitrine' => 'numeric|nullable',
             'tour_taille' => 'numeric|nullable',
+            'largeur_epaules' => 'numeric|nullable',
             'longueur_gilet' => 'numeric|nullable',
-            'encolure' => 'numeric|nullable',
-            'encolure_style' => 'in:v,u,carree',
-            'boutons' => 'in:5,6,7',
+            'boutons' => 'required|integer|in:5,6,7',
             'poches' => 'in:passepoil,classique,double',
         ]);
 

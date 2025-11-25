@@ -18,8 +18,7 @@ class Gilet extends Model
         'tour_poitrine',
         'tour_taille',
         'longueur_gilet',
-        'encolure',
-        'encolure_style',
+        'largeur_epaules',
         'boutons',
         'poches',
     ];

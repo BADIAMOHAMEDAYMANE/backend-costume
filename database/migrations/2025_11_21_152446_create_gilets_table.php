@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
         Schema::create('gilets', function (Blueprint $table) {
@@ -14,17 +13,16 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string('profile_name', 100)->default('Profil Principal');
+            $table->string('profile_name', 100)->default('Profil Gilet');
             $table->decimal('tour_poitrine', 5, 2)->nullable();
             $table->decimal('tour_taille', 5, 2)->nullable();
+            $table->decimal('largeur_epaules', 5, 2)->nullable();
             $table->decimal('longueur_gilet', 5, 2)->nullable();
-            $table->decimal('encolure', 5, 2)->nullable();
-            $table->enum('encolure_style', ['v', 'u', 'carree'])->default('v');
-            $table->enum('boutons', ['5', '6', '7'])->default('6');
-            $table->enum('poches', ['passepoil', 'classique', 'double'])
-                ->default('passepoil');
+            $table->enum('boutons', ['4', '5', '6'])->default('5');
+            $table->enum('poches', ['classique', 'passepoil', 'double'])->default('classique');
         });
     }
+
     public function down(): void
     {
         Schema::dropIfExists('gilets');
