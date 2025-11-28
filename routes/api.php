@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GiletController;
+use App\Http\Controllers\PantalonController;
 use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VesteProfileController;
@@ -31,6 +32,15 @@ Route::prefix('gilets')->group(function () {
     Route::get('/user/{userId}', [GiletController::class, 'getByUser']);
     Route::put('/{id}', [GiletController::class, 'update']);
     Route::delete('/{id}', [GiletController::class, 'delete']);
+});
+
+Route::prefix('pantalons')->group(function () {
+    Route::post('/', [PantalonController::class, 'create']);
+    Route::get('/', [PantalonController::class, 'getall']);
+    Route::get('/{id}', [PantalonController::class, 'getById']);
+    Route::get('/{userId}', [PantalonController::class, 'getAllByUser']);
+    Route::put('/{id}', [PantalonController::class, 'update']);
+    Route::delete('/{id}', [PantalonController::class, 'delete']);
 });
 
 
