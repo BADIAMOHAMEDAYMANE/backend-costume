@@ -18,7 +18,7 @@ Route::post('/check-email', [AuthController::class, 'checkEmail']);
 
 Route::prefix('veste-profiles')->group(function () {
     Route::post('/', [VesteProfileController::class, 'create']);
-    Route::get('/', [VesteProfileController::class, 'getall']);
+    Route::get('/', [VesteProfileController::class, 'getAll']);
     Route::get('/{id}', [VesteProfileController::class, 'getById']);
     Route::get('/user/{userId}', [VesteProfileController::class, 'getByUser']);
     Route::put('/{id}', [VesteProfileController::class, 'update']);
@@ -38,7 +38,7 @@ Route::prefix('pantalons')->group(function () {
     Route::post('/', [PantalonController::class, 'create']);
     Route::get('/', [PantalonController::class, 'getall']);
     Route::get('/{id}', [PantalonController::class, 'getById']);
-    Route::get('/{userId}', [PantalonController::class, 'getAllByUser']);
+    Route::get('/user/{userId}', [PantalonController::class, 'getAllByUser']);
     Route::put('/{id}', [PantalonController::class, 'update']);
     Route::delete('/{id}', [PantalonController::class, 'delete']);
 });

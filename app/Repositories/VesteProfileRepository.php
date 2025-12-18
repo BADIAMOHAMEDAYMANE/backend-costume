@@ -32,7 +32,7 @@ class VesteProfileRepository implements VesteProfileRepositoryInterface
         $profile->update($data);
         return $profile;
     }
-    public function getall()
+    public function getall(): \Illuminate\Database\Eloquent\Collection
     {
         return VesteProfile::all();
     }
