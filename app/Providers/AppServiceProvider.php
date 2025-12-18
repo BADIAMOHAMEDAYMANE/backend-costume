@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\Contracts\JwtRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\CostumeRepository;
 use App\Repositories\JwtRepository;
 use App\Repositories\UserRepository;
 use App\Services\AuthService;
@@ -18,8 +19,10 @@ class AppServiceProvider extends ServiceProvider
         // Bind des interfaces DAO
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(JwtRepositoryInterface::class, JwtRepository::class);
-
-        // Services avec injection des DAO
+        $this->app->bind(
+            \App\Repositories\Contracts\CostumeRepositoryInterface::class,
+            CostumeRepository::class
+        );
         $this->app->singleton(JwtService::class, function ($app) {
             return new JwtService(
                 $app->make(JwtRepositoryInterface::class),
