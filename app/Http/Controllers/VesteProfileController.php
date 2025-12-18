@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Services\VesteProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class VesteProfileController extends Controller
 {
@@ -13,7 +14,7 @@ class VesteProfileController extends Controller
         $this->service = $service;
     }
 
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         $data = $request->validate([
             'user_id' => 'required|integer',
@@ -30,32 +31,66 @@ class VesteProfileController extends Controller
             'ventriere' => 'in:aucune,centrale,cote',
         ]);
 
-        return $this->service->create($data);
+        $profile = $this->service->create($data);
+        return response()->json($profile, 201);
     }
 
-    public function getById($id)
+    public function getById($id): JsonResponse
     {
-        return $this->service->getById($id);
+        $profile = $this->service->getById($id);
+
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+
+        return response()->json($profile);
     }
 
-    public function getByUser($userId)
+    public function getByUser($userId): JsonResponse
     {
-        return $this->service->getByUser($userId);
+        $profiles = $this->service->getByUser($userId);
+        return response()->json($profiles);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
-        return $this->service->update($id, $request->all());
+        $data = $request->validate([
+            'profile_name' => 'string',
+            'tour_poitrine' => 'numeric|nullable',
+            'tour_taille' => 'numeric|nullable',
+            'tour_hanches' => 'numeric|nullable',
+            'largeur_epaules' => 'numeric|nullable',
+            'longueur_manche' => 'numeric|nullable',
+            'longueur_veste' => 'numeric|nullable',
+            'type_revers' => 'in:notch,peak,shawl',
+            'boutons' => 'in:1,2,3',
+            'poches' => 'in:patch,flap,besom',
+            'ventriere' => 'in:aucune,centrale,cote',
+        ]);
+
+        $profile = $this->service->update($id, $data);
+
+        if (!$profile) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+
+        return response()->json($profile);
     }
 
-    public function delete($id): \Illuminate\Http\JsonResponse
+    public function delete($id): JsonResponse
     {
-        $this->service->delete($id);
-        return response()->json(['message' => 'Profile deleted']);
+        $deleted = $this->service->delete($id);
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Profile not found'], 404);
+        }
+
+        return response()->json(['message' => 'Profile deleted successfully']);
     }
-    public function getall(): \Illuminate\Database\Eloquent\Collection
+
+    public function getAll(): JsonResponse
     {
-        return $this->service->getAllVesteProfiles();
+        $profiles = $this->service->getAllVesteProfiles();
+        return response()->json($profiles);
     }
 }
-

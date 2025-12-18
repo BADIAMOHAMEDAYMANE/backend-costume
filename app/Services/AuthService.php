@@ -50,6 +50,13 @@ class AuthService
         return $this->jwtService->generateToken($user);
 
     }
+    public function logout(): array
+    {
+        return [
+            'success' => true,
+            'message' => 'Déconnexion réussie'
+        ];
+    }
 
     public function login(array $data): array
     {

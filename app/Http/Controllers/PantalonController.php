@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\PantalonService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
 use App\Models\Pantalon;
 
 class PantalonController extends Controller
@@ -16,17 +16,21 @@ class PantalonController extends Controller
         $this->service = $service;
     }
 
-    public function getall(): \Illuminate\Database\Eloquent\Collection
+    // Changement : On retourne du JSON pour l'API
+    public function getall(): JsonResponse
     {
-        return $this->service->getAllPantalon();
+        $pantalons = $this->service->getAllPantalon();
+        return response()->json($pantalons);
     }
 
-    public function getAllByUser($userId): \Illuminate\Database\Eloquent\Collection
+    // Changement : On retourne du JSON (évite l'erreur si la collection est vide)
+    public function getAllByUser($userId): JsonResponse
     {
-        return $this->service->getAllByUser((int)$userId);
+        $pantalons = $this->service->getAllByUser((int)$userId);
+        return response()->json($pantalons);
     }
 
-    public function create(Request $request): Pantalon
+    public function create(Request $request): JsonResponse
     {
         $data = $request->validate([
             'user_id' => 'required|integer|exists:users,id',
@@ -42,28 +46,37 @@ class PantalonController extends Controller
             'revers' => 'required|in:oui,non',
             'type_ceinture' => 'required|in:classique,elastique',
         ]);
-        return $this->service->create($data);
+
+        $pantalon = $this->service->create($data);
+        return response()->json($pantalon, 201);
     }
 
-    public function getById($id): Pantalon
+    // LA LIGNE 50 ÉTAIT ICI : On a enlevé le type de retour strict ": Pantalon"
+    public function getById($id): JsonResponse
     {
-        return $this->service->getById($id);
+        $pantalon = $this->service->getById($id);
 
+        if (!$pantalon) {
+            return response()->json(['message' => 'Pantalon non trouvé'], 404);
+        }
+
+        return response()->json($pantalon);
     }
 
-    public function update(Request $request, $id): bool
+    public function update(Request $request, $id): JsonResponse
     {
-
-        return $this->service->update($id, $request->all());
+        $result = $this->service->update($id, $request->all());
+        return response()->json(['success' => $result]);
     }
-    public function delete($id): Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+
+    public function delete($id): JsonResponse
     {
         $result = $this->service->delete($id);
 
         if ($result) {
-            return response('Pantalon supprimé avec succès', 200);
+            return response()->json(['message' => 'Pantalon supprimé avec succès'], 200);
         }
 
-        return response('Pantalon non trouvé ou impossible à supprimer', 404);
+        return response()->json(['message' => 'Pantalon non trouvé'], 404);
     }
 }
