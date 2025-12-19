@@ -91,6 +91,10 @@ class VesteProfileController extends Controller
     public function getAll(): JsonResponse
     {
         $profiles = $this->service->getAllVesteProfiles();
-        return response()->json($profiles);
+        return response()->json([
+            'success' => true,
+            'data' => $profiles,
+            'message' => 'Profils récupérés avec succès'
+        ]);
     }
 }

@@ -32,15 +32,14 @@ class VesteProfileService
     {
         $profile = $this->repo->getById($id);
         if (!$profile) return null;
-
-        return $this->repo->update($profile, $data);
+        return $this->repo->update($id, $data);
     }
 
     public function delete($id)
     {
         $profile = $this->repo->getById($id);
         if ($profile) {
-            return $this->repo->delete($profile);
+            return $this->repo->delete($id);
         }
         return false;
     }

@@ -42,7 +42,7 @@ class AuthService
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'phone' => $data['phone'] ?? null,
-            'role' => 'USER',
+            'role' => 'Client',
         ]);
 
 
@@ -82,6 +82,35 @@ class AuthService
         }
 
         return $this->jwtService->generateToken($user);
+    }
+
+    /**
+     * Validates a token and returns the status along with user details.
+     * * @param string $token
+     * @return array
+     * @throws \Exception
+     */
+    public function validateToken(string $token): array
+    {
+        // 1. Use your JwtService to check if the token is valid and get the user
+        // Your JwtService already handles the repository checks and expiration logic
+        $user = $this->jwtService->getUserFromToken($token);
+
+        if (!$user) {
+            throw new \Exception('Token invalide, expiré ou utilisateur introuvable.');
+        }
+
+        // 2. Return a structured response for the Controller
+        return [
+            'valid' => true,
+            'user' => [
+                'id' => $user->id,
+                'email' => $user->email,
+                'firstName' => $user->firstName,
+                'lastName' => $user->lastName,
+                'role' => $user->role,
+            ]
+        ];
     }
 
 }

@@ -10,7 +10,12 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
+
     public $timestamps = false;
+
+
+    public const ROLE_CLIENT = 'Client';
+    public const ROLE_ADMIN = 'Admin';
 
     protected $fillable = [
         'firstName',
@@ -20,16 +25,26 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'role',
     ];
-    public function vesteProfiles()
+
+    public function isAdmin(): bool
     {
-        return $this->hasMany(\App\Models\VesteProfile::class, 'user_id');
+        return $this->role === self::ROLE_ADMIN;
     }
 
-    public function getJWTIdentifier()
+
+    public function isClient(): bool
     {
-        return $this->getKey();
+        return $this->role === self::ROLE_CLIENT;
     }
 
+
+    public function vesteProfiles() { return $this->hasMany(\App\Models\VesteProfile::class, 'user_id'); }
+    public function Gilet() { return $this->hasMany(\App\Models\Gilet::class, 'user_id'); }
+    public function Pantalon() { return $this->hasMany(\App\Models\Pantalon::class, 'user_id'); }
+    public function Costume() { return $this->hasMany(\App\Models\Costume::class, 'user_id'); }
+
+    // --- JWT Methods ---
+    public function getJWTIdentifier() { return $this->getKey(); }
 
     public function getJWTCustomClaims(): array
     {
@@ -40,7 +55,4 @@ class User extends Authenticatable implements JWTSubject
             'role' => $this->role,
         ];
     }
-
-
-
 }
