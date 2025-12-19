@@ -10,18 +10,12 @@ class UserService
     public function __construct(
         private UserRepositoryInterface $userRepository
     ) {}
-
-    /**
-     * Get all users with pagination using DAO
-     */
     public function getAllUsers(array $filters = []): LengthAwarePaginator
     {
         return $this->userRepository->getAllPaginated($filters);
     }
 
-    /**
-     * Find user by ID using DAO
-     */
+
     public function findUser(int $userId): ?array
     {
         $user = $this->userRepository->findById($userId);

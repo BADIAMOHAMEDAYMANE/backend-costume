@@ -14,6 +14,7 @@ class CostumeController extends Controller
     {
         $this->service = $service;
     }
+
     public function create(Request $request): JsonResponse
     {
         $data = $request->validate([
@@ -26,6 +27,7 @@ class CostumeController extends Controller
 
         return response()->json($this->service->createCostume($data), 201);
     }
+
     public function getById($id): JsonResponse
     {
         $result = $this->service->findCostume($id);
@@ -41,6 +43,7 @@ class CostumeController extends Controller
     {
         return response()->json($this->service->getCostumesByUser($userId));
     }
+
     public function update(Request $request, $id): JsonResponse
     {
         try {
@@ -50,6 +53,7 @@ class CostumeController extends Controller
             return response()->json(['message' => $e->getMessage()], 404);
         }
     }
+
     public function delete($id): JsonResponse
     {
         try {
@@ -59,6 +63,7 @@ class CostumeController extends Controller
             return response()->json(['message' => $e->getMessage()], 404);
         }
     }
+
     public function getall(): JsonResponse
     {
         return response()->json($this->service->getAllCostumes());

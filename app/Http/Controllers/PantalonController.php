@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\PantalonService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use App\Models\Pantalon;
 
 class PantalonController extends Controller
 {
@@ -16,18 +15,24 @@ class PantalonController extends Controller
         $this->service = $service;
     }
 
-    // Changement : On retourne du JSON pour l'API
     public function getall(): JsonResponse
     {
         $pantalons = $this->service->getAllPantalon();
-        return response()->json($pantalons);
+        return response()->json([
+            'success' => true,
+            'data' => $pantalons,
+            'message' => 'Tous les pantalons récupérés'
+        ]);
     }
 
-    // Changement : On retourne du JSON (évite l'erreur si la collection est vide)
     public function getAllByUser($userId): JsonResponse
     {
         $pantalons = $this->service->getAllByUser((int)$userId);
-        return response()->json($pantalons);
+        return response()->json([
+            'success' => true,
+            'data' => $pantalons,
+            'message' => 'Vos profils pantalon'
+        ]);
     }
 
     public function create(Request $request): JsonResponse
@@ -35,13 +40,13 @@ class PantalonController extends Controller
         $data = $request->validate([
             'user_id' => 'required|integer|exists:users,id',
             'profile_name' => 'required|string|max:100',
-            'tour_taille' => 'nullable|numeric|min:0|max:999.99',
-            'tour_hanches' => 'nullable|numeric|min:0|max:999.99',
-            'tour_cuisse' => 'nullable|numeric|min:0|max:999.99',
-            'tour_genou' => 'nullable|numeric|min:0|max:999.99',
-            'tour_cheville' => 'nullable|numeric|min:0|max:999.99',
-            'longueur_entrejambes' => 'nullable|numeric|min:0|max:999.99',
-            'longueur_totale' => 'nullable|numeric|min:0|max:999.99',
+            'tour_taille' => 'nullable|numeric',
+            'tour_hanches' => 'nullable|numeric',
+            'tour_cuisse' => 'nullable|numeric',
+            'tour_genou' => 'nullable|numeric',
+            'tour_cheville' => 'nullable|numeric',
+            'longueur_entrejambes' => 'nullable|numeric',
+            'longueur_totale' => 'nullable|numeric',
             'coupe' => 'required|in:slim,regular,loose',
             'revers' => 'required|in:oui,non',
             'type_ceinture' => 'required|in:classique,elastique',
@@ -51,15 +56,12 @@ class PantalonController extends Controller
         return response()->json($pantalon, 201);
     }
 
-    // LA LIGNE 50 ÉTAIT ICI : On a enlevé le type de retour strict ": Pantalon"
     public function getById($id): JsonResponse
     {
         $pantalon = $this->service->getById($id);
-
         if (!$pantalon) {
             return response()->json(['message' => 'Pantalon non trouvé'], 404);
         }
-
         return response()->json($pantalon);
     }
 
@@ -72,11 +74,6 @@ class PantalonController extends Controller
     public function delete($id): JsonResponse
     {
         $result = $this->service->delete($id);
-
-        if ($result) {
-            return response()->json(['message' => 'Pantalon supprimé avec succès'], 200);
-        }
-
-        return response()->json(['message' => 'Pantalon non trouvé'], 404);
+        return response()->json(['message' => $result ? 'Supprimé' : 'Non trouvé'], $result ? 200 : 404);
     }
 }
