@@ -31,21 +31,35 @@ Le système est conçu pour être extensible et facilement consommable par des a
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 📂 Structure du projet
+
 app/
+
  ├── Models/
- │    └── Pantalon.php
- ├── Http/
- │    ├── Controllers/
- │    │      └── Admin/
- │    └── Requests/
- ├── Services/
-database/
- ├── migrations/
- └── seeders/
-routes/
- ├── api.php
- └── web.php
  
+ │    └── Pantalon.php
+ 
+ ├── Http/
+ 
+ │    ├── Controllers/
+ 
+ │    │      └── Admin/
+ 
+ │    └── Requests/
+ 
+ ├── Services/
+
+database/
+
+ ├── migrations/
+ 
+ └── seeders/
+
+routes/
+
+ ├── api.php
+ 
+ └── web.php
+
 ⚙️ Installation
 🔽 1. Cloner le projet
 git clone https://github.com/BADIAMOHAMEDAYMANE/backend-costume.git
@@ -115,8 +129,11 @@ git commit -m "Add new feature"
 
 # Push
 git push origin feature/new-feature
+
 👤 Auteur
 
 Mohamed Aymane Badia
+
 🎓 Étudiant en 4ème année – IA & Data Science
+
 💻 Passionné par le développement backend & les systèmes intelligents
