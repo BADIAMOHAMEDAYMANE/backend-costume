@@ -1,85 +1,34 @@
-👔 Costume Management System - Laravel Backend
+# 👔 Costume Management System - Laravel Backend
 
-📌 Description
+<p align="left">
+  <img src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" />
+  <img src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/API-RESTful-blue?style=for-the-badge" />
+</p>
 
-Costume Management System est une API backend développée avec Laravel permettant de gérer efficacement un inventaire de costumes.
+## 📌 Description
+**Costume Management System** est une API backend robuste développée avec **Laravel**, permettant une gestion centralisée et efficace d'un inventaire de costumes. 
 
-Le système fournit une architecture robuste et extensible pour :
+Le système est conçu pour être extensible et facilement consommable par des applications Frontend (React, Vue) ou Mobiles.
 
-la gestion des articles (costumes, pantalons, etc.)
+---
 
-l’administration des utilisateurs
+## 🚀 Fonctionnalités Clés
+* 📦 **Gestion de Stock** : CRUD complet des articles avec suivi en temps réel.
+* 👤 **Système d'Authentification** : Sécurisation des accès via **JWT / Laravel Sanctum**.
+* 🔐 **Module Admin** : Dashboard dédié pour la gestion des utilisateurs et des commandes.
+* 👖 **Modèles Spécialisés** : Logique métier avancée pour les articles (ex: classe Pantalon avec attributs taille/coupe).
+* ⚡ **Architecture API** : Endpoints normalisés avec réponses JSON structurées.
 
-la gestion des commandes
+---
 
-l’intégration avec des applications frontend (React, mobile…)
-
-🎯 Objectifs du projet
-
-Mettre en place une API REST propre et scalable
-
-Implémenter une logique métier modulaire (ex: Pantalon)
-
-Appliquer les bonnes pratiques Laravel (MVC, Services, Validation…)
-
-Assurer la sécurité et la maintenabilité
-
-🚀 Fonctionnalités
-📦 Gestion des produits
-
-CRUD complet des costumes
-
-Gestion des catégories (vestes, pantalons, accessoires…)
-
-Gestion des stocks en temps réel
-
-👖 Modèles spécifiques
-
-Classe Pantalon avec attributs personnalisés :
-
-taille
-
-longueur
-
-coupe
-
-👤 Gestion des utilisateurs
-
-Authentification sécurisée (JWT / Sanctum)
-
-Gestion des rôles (Admin / User)
-
-🔐 Module Admin
-
-Dashboard administrateur
-
-Gestion des utilisateurs
-
-Gestion des commandes
-
-Suivi des stocks
-
-⚡ API RESTful
-
-Endpoints structurés et normalisés
-
-Réponses JSON
-
-Facilement connectable avec React / Mobile
-
-🧪 Tests
-
-.Tests unitaires
-.Tests fonctionnels
-
-🛠️ Stack Technique
-Technologie	Description
-Laravel	Framework backend
-PHP 8.1+	Langage principal
-MySQL	Base de données
-Vite	Bundler frontend
-Tailwind CSS	UI styling
-Composer	Gestion dépendances PHP
+## 🛠️ Stack Technique
+![Laravel](https://img.shields.io/badge/laravel-%23FF2D20.svg?style=for-the-badge&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/php-%23777BB4.svg?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-%234479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Composer](https://img.shields.io/badge/composer-%23885630.svg?style=for-the-badge&logo=composer&logoColor=white)
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 📂 Structure du projet
 app/
