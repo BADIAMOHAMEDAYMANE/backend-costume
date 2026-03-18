@@ -69,9 +69,8 @@ Facilement connectable avec React / Mobile
 
 🧪 Tests
 
-Tests unitaires
-
-Tests fonctionnels
+.Tests unitaires
+.Tests fonctionnels
 
 🛠️ Stack Technique
 Technologie	Description
@@ -81,6 +80,7 @@ MySQL	Base de données
 Vite	Bundler frontend
 Tailwind CSS	UI styling
 Composer	Gestion dépendances PHP
+
 📂 Structure du projet
 app/
  ├── Models/
@@ -96,13 +96,16 @@ database/
 routes/
  ├── api.php
  └── web.php
+ 
 ⚙️ Installation
 🔽 1. Cloner le projet
 git clone https://github.com/BADIAMOHAMEDAYMANE/backend-costume.git
 cd backend-costume
+
 📦 2. Installer les dépendances
 composer install
 npm install && npm run build
+
 ⚙️ 3. Configuration environnement
 cp .env.example .env
 php artisan key:generate
@@ -112,8 +115,10 @@ Configurer la base de données dans .env :
 DB_DATABASE=costume_db
 DB_USERNAME=root
 DB_PASSWORD=
+
 🗄️ 4. Migration & Seed
 php artisan migrate --seed
+
 ▶️ 5. Lancer le serveur
 php artisan serve
 🔗 API Endpoints (exemples)
@@ -123,9 +128,10 @@ POST	/api/costumes	Ajouter un costume
 GET	/api/costumes/{id}	Détails
 PUT	/api/costumes/{id}	Modifier
 DELETE	/api/costumes/{id}	Supprimer
+
 🔐 Sécurité
 
-Authentification via Laravel Sanctum / JWT
+Authentification via Laravel JWT
 
 Validation des requêtes (Form Requests)
 
